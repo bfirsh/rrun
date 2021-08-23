@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+function usage {
+    echo "usage: rrun host [command]"
+    echo ""
+    echo "rrun rsyncs the current directory to a host then runs a command over ssh."
+    exit 1
+}
+if [ $# == 0 ]; then
+    usage
+fi
+
+DIR=rexec/$(basename $(pwd))
+HOST=$1
+COMMAND=${@:2}
+if [ -z "$COMMAND" ]; then
+    COMMAND="exec \$SHELL --login"
+fi
+
+>&2 echo "Copying current directory..."
+rsync --rsync-path="mkdir -p \"$DIR\" && rsync" --archive --compress --progress --verbose . "$HOST":"$DIR" 1>&2
+>&2 echo ""
+>&2 echo "Running '$COMMAND'"
+exec ssh -Atq "$HOST" "cd \"$DIR\" && $COMMAND"
+
