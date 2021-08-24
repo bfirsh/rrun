@@ -1,6 +1,6 @@
 # rrun
 
-rrun rsyncs the current directory thens runs a command over ssh.
+rrun rsyncs the current directory then runs a command over ssh.
 
 This seems to be a really common pattern, and I was surprised to find there isn't a good solution to doing this. So, here's a ridiculously simple shell script.
 
