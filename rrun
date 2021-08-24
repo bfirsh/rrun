@@ -19,7 +19,7 @@ if [ -z "$COMMAND" ]; then
 fi
 
 >&2 echo "Copying current directory..."
-rsync --rsync-path="mkdir -p \"$DIR\" && rsync" --archive --compress --progress --verbose . "$HOST":"$DIR" 1>&2
+rsync --rsync-path="mkdir -p \"$DIR\" && rsync" --archive --compress --progress . "$HOST":"$DIR" 1>&2
 >&2 echo ""
 >&2 echo "Running '$COMMAND'"
 exec ssh -Atq "$HOST" "cd \"$DIR\" && $COMMAND"
