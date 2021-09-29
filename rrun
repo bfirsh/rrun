@@ -11,7 +11,7 @@ if [ $# == 0 ]; then
     usage
 fi
 
-DIR=rexec/$(basename $(pwd))
+DIR=rrun/$(basename $(pwd))
 HOST=$1
 COMMAND=${@:2}
 if [ -z "$COMMAND" ]; then
